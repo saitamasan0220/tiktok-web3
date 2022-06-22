@@ -31,6 +31,7 @@ const useAccount = () => {
                 authority: wallet.publicKey, ...defaultAccounts,
             }
         })
+        console.log("USER IS SIGNED UP")
     }
     return {signup}
 
