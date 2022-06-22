@@ -22,6 +22,14 @@ const defaultAccounts = {
 let isAccount = false
 
 const MainView = () => {
+
+  const [isAccount, setAccount] = useState(false)
+  const wallet = useWallet()
+  const connection = new anchor.web3.Connection(SOLANA_HOST)
+
+  const program = getProgramInstance(connection, wallet)
+
+  const {signup} = useAccount()
   return (
     <>
       {isAccount ? (
@@ -29,7 +37,7 @@ const MainView = () => {
           Tiktoks will go here
         </div>
       ) : (
-        <Signup />
+        <Signup signup = {signup} wallet ={wallet.publicKey.toBase58()} />
       )}
     </>
   )

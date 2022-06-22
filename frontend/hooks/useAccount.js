@@ -35,3 +35,5 @@ const useAccount = () => {
     return {signup}
 
 }
+
+export default useAccount
