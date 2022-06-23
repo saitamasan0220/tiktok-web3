@@ -35,7 +35,7 @@ const MainView = () => {
 
   const program = getProgramInstance(connection, wallet)
 
-  const [tiktoks, setTikToks] = useState()
+  const [tiktoks, setTikToks] = useState([])
 
   const [newVideoShow, setNewVideoShow] = useState(false)
   const [description, setDescription] = useState('')
@@ -82,7 +82,14 @@ const MainView = () => {
       {isAccount ? (
         <div>
           {newVideoShow && (
-            <UploadModal />
+            <UploadModal
+              description={description}
+              videoUrl = {videoUrl}
+              newVideo = {newVideo}
+              setDescription = {setDescription}
+              setVideoUrl = {setVideoUrl}
+              setNewVideoShow = {setNewVideoShow}
+            />
           )}
           <div className={styles.appVideos}>
             {tiktoks.length === 0 ? (
@@ -106,7 +113,10 @@ const MainView = () => {
               })
             )}
           </div>
-          <BottomBar />
+          <BottomBar 
+            setNewVideoShow={setNewVideoShow}
+            getTiktoks = {getTiktoks}
+          />
         </div>
       ) : (
         <Signup signup = {signup} wallet ={wallet.publicKey.toBase58()} />
