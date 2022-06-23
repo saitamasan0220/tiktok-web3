@@ -41,7 +41,7 @@ const useTiktok = (
     }
 
     // Function to call createComment from smartContract
-    const createComment = async(address, count, comment) +> {
+    const createComment = async(address, count, comment) => {
 
     }
 
