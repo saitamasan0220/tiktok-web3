@@ -1,4 +1,9 @@
 import React from 'react'
+import UploadModal from './UploadModal'
+import Video from './Video'
+import BottomBar from './BottomBar'
+
+import styles from '../styles/MainView.module.css'
 import Signup from './Signup'
 import {useEffect, useState} from 'react'
 import {useWallet} from '@solana/wallet-adapter-react'
@@ -76,7 +81,19 @@ const MainView = () => {
     <>
       {isAccount ? (
         <div>
-          Tiktoks will go here
+          {newVideoShow && (
+            <UploadModal />
+          )}
+          <div className={styles.appVideos}>
+            {tiktoks.length === 0 ? (
+              <h1>No Videos</h1>
+            ) : (
+              tiktoks.map((tiktok, id) => {
+                <Video />
+              })
+            )}
+          </div>
+          <BottomBar />
         </div>
       ) : (
         <Signup signup = {signup} wallet ={wallet.publicKey.toBase58()} />
