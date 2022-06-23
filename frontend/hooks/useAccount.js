@@ -15,6 +15,8 @@ const defaultAccounts = {
     systemProgram: SystemProgram.programId
 }
 
+// trivial change
+
 const useAccount = () => {
     const wallet = useWallet()
     const connection = new anchor.web3.Connection(SOLANA_HOST)
