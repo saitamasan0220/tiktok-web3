@@ -96,7 +96,7 @@ const MainView = () => {
               <h1>No Videos</h1>
             ) : (
               tiktoks.map((tiktok, id) => {
-                <Video 
+                return <Video 
                   key = {id}
                   address = {tiktok.publicKey.toBase58()}
                   url = {tiktok.account.videoUrl}

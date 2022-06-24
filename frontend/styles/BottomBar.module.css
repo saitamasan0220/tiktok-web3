@@ -1,5 +1,6 @@
 .wrapper {
-    background-color: red;
+    /* background-color: red; */
+     background-color: black;
     width: 72.6%;
     display: flex;
     justify-content: space-evenly;
