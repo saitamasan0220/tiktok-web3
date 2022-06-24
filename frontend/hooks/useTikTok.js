@@ -23,9 +23,11 @@ const useTiktok = (
     setVideoUrl,
     setNewVideoShow,
 ) => {
+
     const wallet = useWallet()
     const connection = new anchor.web3.Connection(SOLANA_HOST)
     const program = getProgramInstance(connection, wallet)
+
     const getTiktoks = async() => {
         console.log('fetching')
 
@@ -50,7 +52,31 @@ const useTiktok = (
 
     // Function to call createComment from smartContract
     const createComment = async(address, count, comment) => {
+        let [comment_pda] = await anchor.web3.PublicKey.findProgramAddress(
+            [
+                utf8.encode('comment'),
+                new PublicKey(address).toBuffer(),
+                new BN(count).toArrayLike(Buffer, 'be', 8)
+            ],
+            program.programId
+        )
 
+        if (userDetail) {
+            const tx = await program.rpc.createComment(
+                comment,
+                userDetail.userName,
+                userDetail.userProfileImageUrl,
+                {
+                    accounts: {
+                        video: new PublicKey(address),
+                        comment: comment_pda,
+                        authority: wallet.publicKey,
+                        ...defaultAccounts,
+                    }
+                }
+            )
+            console.log(tx)
+        }
     }
 
     // Function to call createvideo from smartContract
@@ -85,7 +111,29 @@ const useTiktok = (
     // Function to fetch comments from the commentAccount on the smartContract
     const getComments = async (address, count) => {
 
+        let commentSigners = []
+        
+        for(let i = 0; i < count; i++) {
+            let [commentSigner] = await anchor.web3.PublicKey.findProgramAddress(
+                [
+                    utf8.encode('comment'),
+                    new PublicKey(address).toBuffer(),
+                    new BN(i).toArrayLike(Buffer, 'be', 8),
+                ],
+                program.programId,
+            )
+
+            commentSigners.push(commentSigner)
+        }
+
+        const comments = await program.account.commentAccount.fetchMultiple(
+            commentSigners,
+        )
+
+        console.log('comments: ', comments)
+        return comments
     }
+
     return { getTiktoks, likeVideo, createComment, newVideo, getComments}
 }
 
