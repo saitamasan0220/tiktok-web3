@@ -17,6 +17,9 @@ const Footer = ({channel, description, song}) => {
         <div className={styles.footerRecord}>
           <Image
             src={'https://static.thenounproject.com/png/934821-200.png'}
+            alt='vinyl record'
+            width={50}
+            height={50}
           />
         </div>
       </div>
