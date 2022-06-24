@@ -38,7 +38,7 @@ const useTiktok = (
     // Function to call likeVideo from smartContract
     const likeVideo = async address => {
         console.log('video liked!')
-        const tx = await program.rpc.like_Video({
+        const tx = await program.rpc.likeVideo({
              accounts: {
                 video: new PublicKey(address),
                 authority: wallet.publicKey,
