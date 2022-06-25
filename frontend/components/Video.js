@@ -68,7 +68,14 @@ const Video = ({
         />
 
         {showCommentsModal && (
-            <Comments />
+            <Comments 
+                onHide = {hideComments}
+                index = {index}
+                address = {address}
+                createComment = {createComment}
+                getComments = {getComments}
+                commentCount = {commentCount}
+            />
         )}
     </div>
   )

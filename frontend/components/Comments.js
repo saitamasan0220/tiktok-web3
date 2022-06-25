@@ -56,6 +56,9 @@ const Comments = ({
             value = {newComment}
             placeholder = 'Leave a comment...'
           />
+          <button className={styles.button} onClick = {replyClicked}>
+            Reply
+          </button>
         </div>
       </div>
     )
