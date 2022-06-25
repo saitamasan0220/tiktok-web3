@@ -1,7 +1,8 @@
 .footer {
     position: relative;
     color: white;
-    bottom: 150px;
+    bottom: 162px;
+    /* bottom: 150px; */
     margin-left: 40px;
     display: flex;
 }
@@ -24,7 +25,8 @@
 }
 
 .footerIcon {
-    position: relative;
+    /* position: relative; */
+    position: absolute;
 }
 
 .footerTicker > .ticker {
